@@ -33,7 +33,7 @@ class vqc_net(nn.Module):
         q_out = torch.Tensor(0, self.args.target_class)
         q_out = q_out.to(self.args.device)
         for elem in q_in:
-            q_out_elem = self.qai.quantum_net(self.qai, elem, self.q_params).float().unsqueeze(0)
+            q_out_elem = self.qai.quantum_net(self.qai, elem, self.q_params).float().unsqueeze(0).to(self.args.device)
             q_out = torch.cat((q_out, q_out_elem))
 
         # return the two-dimensional prediction from the postprocessing layer
