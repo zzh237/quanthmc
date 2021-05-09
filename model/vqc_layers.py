@@ -36,8 +36,8 @@ class vqc_net(nn.Module):
         
         for elem in q_in:
             q_out_elem = self.qai.quantum_net(self.qai, elem, self.q_params).float().unsqueeze(0).to('cpu')
-            print('###q_out is cuda', q_out.is_cuda)
-            print('###q_out_elem is cuda', q_out_elem.is_cuda)
+            # print('###q_out is cuda', q_out.is_cuda)
+            # print('###q_out_elem is cuda', q_out_elem.is_cuda)
             
             q_out = torch.cat((q_out, q_out_elem))
 
