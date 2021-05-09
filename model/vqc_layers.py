@@ -28,14 +28,14 @@ class vqc_net(nn.Module):
         # obtain the input features for the quantum circuit
         # by reducing the feature dimension from 512 to 4
         q_in = torch.tanh(input_features) * np.pi / 2.0
-        q_in = q_in.to('cpu')
+        q_in = q_in.to(self.args.device)
         
         # Apply the quantum circuit to each element of the batch and append to q_out
         q_out = torch.Tensor(0, self.args.target_class)
-        q_out = q_out.to('cpu') #qylange doesn't support gpu yet
+        q_out = q_out.to(self.args.device) #qylange doesn't support gpu yet
         
         for elem in q_in:
-            q_out_elem = self.qai.quantum_net(self.qai, elem, self.q_params).float().unsqueeze(0).to('cpu')
+            q_out_elem = self.qai.quantum_net(self.qai, elem, self.q_params).float().unsqueeze(0).to(self.args.device)
             # print('###q_out is cuda', q_out.is_cuda)
             # print('###q_out_elem is cuda', q_out_elem.is_cuda)
             
