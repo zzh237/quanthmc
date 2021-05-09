@@ -226,6 +226,15 @@ class mnist_data(classification_data):
 
         index = np.random.permutation(range(num_data))
 
+        
+        x_train = x_train.to(self.args.device)
+        y_train = y_train.to(self.args.device)
+        x_test = x_test.to(self.args.device)
+        y_test = y_test.to(self.args.device)
+
+        
+        
+        
         x_for_train = x_train[index[:self.args.N_tr]]
         y_for_train = y_train[index[:self.args.N_tr]]
 
@@ -234,6 +243,9 @@ class mnist_data(classification_data):
 
         x_for_test = x_test
         y_for_test = y_test
+
+
+
 
         mnist_train= TensorDataset(x_for_train,y_for_train)
         # mnist_val= TensorDataset(x_for_val,y_for_val)

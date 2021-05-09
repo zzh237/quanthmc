@@ -52,6 +52,6 @@ class digits_data(classification_data):
         y_val = y_val.to(self.args.device)
         data = {'x_train':x_train, "y_train":y_train, "x_val":x_val, "y_val":y_val}
 
-        digits_train= TensorDataset(torch.FloatTensor(data['x_train']),torch.LongTensor(data['y_train']))
-        digits_test= TensorDataset(torch.FloatTensor(data['x_val']),torch.LongTensor(data['y_val']))
+        digits_train= TensorDataset(data['x_train'],data['y_train'])
+        digits_test= TensorDataset(data['x_val'],data['y_val'])
         return (digits_train,digits_test) 
