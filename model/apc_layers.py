@@ -33,7 +33,7 @@ class apc_net(nn.Module):
         q_out = q_out.to(self.args.device)
         for elem in q_in:
             elem = elem / torch.clamp(torch.sqrt(torch.sum(elem ** 2)), min = 1e-9)
-            q_out_elem = self.qai.quantum_net(self.qai, elem, self.q_params).float().unsqueeze(0)
+            q_out_elem = self.qai.quantum_net(self.qai, elem, self.q_params).float().unsqueeze(0).to(q_out)
             q_out = torch.cat((q_out, q_out_elem))
 
         # return the two-dimensional prediction from the postprocessing layer
