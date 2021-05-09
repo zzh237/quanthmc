@@ -15,11 +15,12 @@ class adam(algo_interface):
             args.flat_ims = True 
         
         data_train, data_test = data 
+        
 
         self.trainloader = DataLoader(data_train, batch_size=args.batch_size, shuffle=True, pin_memory=False,
-                                              num_workers=3)
+                                              num_workers=self.args.num_workers)
         self.valloader = DataLoader(data_test, batch_size=args.batch_size, shuffle=False, pin_memory=False,
-                                            num_workers=3)
+                                            num_workers=self.args.num_workers)
 
 
         self.args = args 

@@ -19,9 +19,9 @@ class hmc(algo_interface):
             train_size = data_train.train_data.shape[0]
             val_size = data_test.test_data.shape[0]
             self.trainloader = DataLoader(data_train, batch_size=train_size, shuffle=True, pin_memory=False,
-                                              num_workers=3)
+                                              num_workers=self.args.num_workers)
             self.valloader = DataLoader(data_test, batch_size=val_size, shuffle=False, pin_memory=False,
-                                            num_workers=3)
+                                            num_workers=self.args.num_workers)
 
 
             self.x_train, self.y_train = data[0].train_data, data[0].train_labels

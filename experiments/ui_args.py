@@ -123,10 +123,18 @@ def create_args()->dict:
     
     
     
-    
+    # distributed processing
+    parser.add_argument('--num_workers', default=3, type=int, 
+                            help='？')
+
     args = parser.parse_args()
     
     args.device = 'cuda' if torch.cuda.is_available() else 'cpu'
+
+    if args.device == 'cuda':
+        args.num_workers = 0
+    else:
+        args.num_workers = 3
 
     
 
