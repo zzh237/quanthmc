@@ -33,6 +33,7 @@ class vqc_net(nn.Module):
         # Apply the quantum circuit to each element of the batch and append to q_out
         q_out = torch.Tensor(0, self.args.target_class)
         q_out = q_out.to(self.args.device)
+        
         for elem in q_in:
             q_out_elem = self.qai.quantum_net(self.qai, elem, self.q_params).float().unsqueeze(0).to(self.args.device)
             q_out = torch.cat((q_out, q_out_elem))
