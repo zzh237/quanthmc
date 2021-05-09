@@ -2,7 +2,7 @@ cd /zzproject/quanthmc
 # apt-get -y install cmake protobuf-compiler
 python3 -m pip install --user --upgrade pip
 # pip3 install qulacs-gpu
-pip3 install pennylane-qulacs["cpu"]
+pip3 install pennylane-qulacs["gpu"]
 pip3 install matplotlib
 pip3 install -U scikit-learn
 pip3 install termcolor
