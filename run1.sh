@@ -1,4 +1,5 @@
 cd /zzproject/quanthmc
+apt-get -y install cmake protobuf-compiler
 python3 -m pip install --user --upgrade pip
 pip3 install qulacs-gpu
 pip3 install matplotlib
