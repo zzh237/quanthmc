@@ -52,7 +52,16 @@ class hmc(algo_interface):
 
     def fit(self):
         hmt.set_random_seed(123)
+        print("x_train is on cuda", self.x_train.is_cuda)
+
+        print("y_train is on cuda", self.y_train.is_cuda)
+
+        
+
         params_init = hmt.util.flatten(self.model).to(self.args.device ).clone()
+
+        print("params_init is on cuda", params_init.is_cuda)
+        
         self.params_hmc, result = hmt.sample_model(self.model, self.x_train, self.y_train, model_loss=self.losstype, params_init=params_init, num_samples=self.args.num_samples,
 							   step_size=self.args.step_size, num_steps_per_sample=self.args.L,tau_out=self.args.tau_out,tau_list=self.tau_list)
         
