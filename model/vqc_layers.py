@@ -28,6 +28,7 @@ class vqc_net(nn.Module):
         # obtain the input features for the quantum circuit
         # by reducing the feature dimension from 512 to 4
         q_in = torch.tanh(input_features) * np.pi / 2.0
+        q_in = q_in.to(self.args.device)
         
         # Apply the quantum circuit to each element of the batch and append to q_out
         q_out = torch.Tensor(0, self.args.target_class)

@@ -21,12 +21,12 @@ def assign_device():
     return feature_size     
 
 class vqc():
-    if torch.cuda.is_available():
-        dev = qml.device('qulacs.simulator', gpu=True, wires=assign_device())
-        print("### dev is gpu")
-    else:
-        dev = qml.device("default.qubit", wires=assign_device())
-        print("### dev is cpu")
+    # if torch.cuda.is_available():
+    #     dev = qml.device('qulacs.simulator', gpu=True, wires=assign_device())
+    #     print("### dev is gpu")
+    # else:
+    dev = qml.device("default.qubit", wires=assign_device())
+    print("### dev is qubit")
     def __init__(self, args):
         self.args = args 
         

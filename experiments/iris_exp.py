@@ -21,10 +21,11 @@ class iris_exp(exp_interface):
 
     # this we do rather use it here
     def prepare_model(self)->nn.Module:     
+        device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
         if self.args.model_name == 'Quant':   
-            model = vqc_net(self.args, vqc(self.args)).to(self.args.device)
+            model = vqc_net(self.args, vqc(self.args)).to(device)
         if self.args.model_name == 'mlp':
-            model = MLP(input_dim=4, width=50, depth=self.args.mlp_depth, output_dim=3).to(self.args.device)
+            model = MLP(input_dim=4, width=50, depth=self.args.mlp_depth, output_dim=3).to(device)
         return model 
         
     # @getattr
