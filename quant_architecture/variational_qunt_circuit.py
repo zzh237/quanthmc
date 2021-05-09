@@ -2,6 +2,7 @@ import pennylane as qml
 
 from experiments.ind_exp import args
 import numpy as np 
+import torch 
 
 def assign_device():
     feature_size = 10
@@ -20,7 +21,11 @@ def assign_device():
     return feature_size     
 
 class vqc():
-    dev = qml.device("default.qubit", wires=assign_device())
+    if torch.cuda.is_available():
+        dev = qml.device('qulacs.simulator', gpu=True, wires=assign_device())
+    else:
+        dev = qml.device("default.qubit", wires=assign_device())
+    
     def __init__(self, args):
         self.args = args 
         

@@ -10,7 +10,10 @@ import numpy as np
 
 class ampc():
 
-    dev = qml.device("default.qubit", wires=10)
+    if torch.cuda.is_available():
+        dev = qml.device('qulacs.simulator', gpu=True, wires=10)
+    else:
+        dev = qml.device("default.qubit", wires=10)
     
     
     def __init__(self, args):
