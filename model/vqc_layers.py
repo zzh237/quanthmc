@@ -35,7 +35,7 @@ class vqc_net(nn.Module):
         q_out = q_out.to('cpu') #qylange doesn't support gpu yet
         
         for elem in q_in:
-            q_out_elem = self.qai.quantum_net(self.qai, elem, self.q_params).float().unsqueeze(0)
+            q_out_elem = self.qai.quantum_net(self.qai, elem, self.q_params).float().unsqueeze(0).to('cpu')
             print('###q_out is cuda', q_out.is_cuda)
             print('###q_out_elem is cuda', q_out_elem.is_cuda)
             
