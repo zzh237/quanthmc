@@ -27,13 +27,14 @@ class apc_net(nn.Module):
 
         # obtain the input features for the quantum circuit
         q_in = input_features 
+        q_in = q_in.to('cpu')
         
         # Apply the quantum circuit to each element of the batch and append to q_out
         q_out = torch.Tensor(0, self.args.target_class)
-        q_out = q_out.to(self.args.device)
+        q_out = q_out.to('cpu')
         for elem in q_in:
             elem = elem / torch.clamp(torch.sqrt(torch.sum(elem ** 2)), min = 1e-9)
-            q_out_elem = self.qai.quantum_net(self.qai, elem, self.q_params).float().unsqueeze(0).to(q_out)
+            q_out_elem = self.qai.quantum_net(self.qai, elem, self.q_params).float().unsqueeze(0)
             q_out = torch.cat((q_out, q_out_elem))
 
         # return the two-dimensional prediction from the postprocessing layer

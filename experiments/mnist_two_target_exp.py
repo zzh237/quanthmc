@@ -37,9 +37,9 @@ class mnist_two_target_exp(exp_interface):
         
         if self.args.algo_name == 'HMC':
             self.algo.fit()
-        acc, loss = self.algo.predict()
+        err, best_err,loss = self.algo.predict()
         
-        return acc, loss 
+        return err, best_err,loss  
     
     
         
