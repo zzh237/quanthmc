@@ -1,6 +1,6 @@
 cd /zzproject/quanthmc
 export PYTHONPATH=$PYTHONPATH:/zzproject/quanthmc
-for n in 0.3
+for n in 0.5 0.7
 do
 for m in 0 
 do
