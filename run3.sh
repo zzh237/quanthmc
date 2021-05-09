@@ -1,3 +1,4 @@
+echo "check run"
 cd /zzproject/quanthmc
 export PYTHONPATH=$PYTHONPATH:/zzproject/quanthmc
 for n in 0.01 0.03 0.05 0.07
