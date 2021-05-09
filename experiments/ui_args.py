@@ -129,8 +129,10 @@ def create_args()->dict:
 
     args = parser.parse_args()
     
-    # args.device = 'cuda' if torch.cuda.is_available() else 'cpu'
-    args.device = 'cpu'
+    args.device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    if args.algo_name == 'HMC' and args.model_name == 'Quant':
+        args.device = 'cpu'
+    
     if args.device == 'cuda':
         print("########: GPU IS Open!")
 
