@@ -16,7 +16,7 @@ def create_args()->dict:
     parser.add_argument('--model_name', default='Quant', type=str, 
                                 help='？')
 
-    parser.add_argument('--data_name', default='mnist_two_target', type=str, 
+    parser.add_argument('--data_name', default='iris', type=str, 
                                 help='？')
     
     # Define the neural network depth and complexity
@@ -26,7 +26,7 @@ def create_args()->dict:
 
     ## these parameters are created under the running process 
     parser.add_argument('--n_params', default=10, type=int, help="?")
-    parser.add_argument('--tr_ratio', default=0.01, type=float, help="?")
+    parser.add_argument('--tr_ratio', default=0.1, type=float, help="?")
     parser.add_argument('--feature_dim', default=4, type=int, help="?")
     parser.add_argument('--target_class', default=1, type=int, help="?")
 

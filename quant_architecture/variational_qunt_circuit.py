@@ -23,9 +23,10 @@ def assign_device():
 class vqc():
     if torch.cuda.is_available():
         dev = qml.device('qulacs.simulator', gpu=True, wires=assign_device())
+        print("### dev is gpu")
     else:
         dev = qml.device("default.qubit", wires=assign_device())
-    
+        print("### dev is cpu")
     def __init__(self, args):
         self.args = args 
         

@@ -22,9 +22,9 @@ class iris_exp(exp_interface):
     # this we do rather use it here
     def prepare_model(self)->nn.Module:     
         if self.args.model_name == 'Quant':   
-            model = vqc_net(self.args, vqc(self.args))
+            model = vqc_net(self.args, vqc(self.args)).to(self.args.device)
         if self.args.model_name == 'mlp':
-            model = MLP(input_dim=4, width=50, depth=self.args.mlp_depth, output_dim=3)
+            model = MLP(input_dim=4, width=50, depth=self.args.mlp_depth, output_dim=3).to(self.args.device)
         return model 
         
     # @getattr
