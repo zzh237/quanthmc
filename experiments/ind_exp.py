@@ -4,7 +4,7 @@ from datetime import datetime
 
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
-from web.app import * 
+# from web.app import * 
 import shutil
 from experiments.ui_args import * 
 args = create_args() #as long as the compiler see the parse arg, it starts to receive args from the terminal
