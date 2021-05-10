@@ -44,6 +44,10 @@ class adam_updater():
         self.optimizer.zero_grad()
         out = self.model(x)
         if self.args.target_class ==1: #binary classification, the out is still logits
+            print("#### x is on cuda", x.is_cuda)
+            print("#### out is on cuda", out.is_cuda)
+            print("#### y is on cuda", y.is_cuda)
+            
             loss = F.binary_cross_entropy_with_logits(out, y, reduction='mean')
         if self.args.target_class >2: #multiclassiciation , y is in 1D, and label is 0,1,2,3,4
             loss = F.cross_entropy(out, y, reduction='mean') 

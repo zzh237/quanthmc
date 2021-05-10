@@ -43,7 +43,7 @@ class mnist_data(classification_data):
         if self.args.data_name == 'mnist':
             data = self.load_data() 
         if self.args.data_name == 'mnist_two_target':
-            data = self.load_binary_with_padding(0, 1)   
+            data = self.load_binary_with_padding(6, 8)   
         return data 
 
     
