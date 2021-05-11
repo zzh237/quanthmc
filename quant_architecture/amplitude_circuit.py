@@ -17,13 +17,14 @@ class ampc():
     
     
     dev = qml.device("default.qubit", wires=assign_device())
+    args.quant_architecture = "ampc"
     
     def __init__(self, args):
         self.args = args 
         self.args.n_qubits = assign_device()                # Number of qubits
         self.args.q_depth = assign_depth()                 # Depth of the quantum circuit (number of variational layers)
         self.args.q_delta = 0.01              # Initial spread of random quantum weights
-        self.args.quant_architecture = repr(self)
+        
 
     def H_layer(self, nqubits):
         """Layer of single-qubit Hadamard gates.

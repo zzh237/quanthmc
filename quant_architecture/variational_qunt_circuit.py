@@ -13,6 +13,7 @@ class vqc(quant_arc_interface):
     # else:
     dev = qml.device("default.qubit", wires=assign_device())
     print("### dev is qubit")
+    args.quant_architecture = "vqc"
     def __init__(self, args):
         self.args = args 
         self.args.n_qubits = assign_device()                # Number of qubits
@@ -21,8 +22,7 @@ class vqc(quant_arc_interface):
         if args.data_name == 'iris':
             self.args.q_depth = 2
 
-        self.args.quant_architecture = repr(self)
-        print("pass")
+       
         
     def H_layer(self, nqubits):
         """Layer of single-qubit Hadamard gates.
