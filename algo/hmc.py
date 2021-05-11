@@ -107,13 +107,13 @@ class hmc(algo_interface):
                 
                 
                 err[s-1] = (reduced_mean.float() != self.y_val.flatten()).sum().float()/self.y_val.shape[0]
-                print("ensemble_logis is on GPU", ensemble_logits.is_cuda)
-                print("pred_reduced is on GPU", pred_reduced.is_cuda)
+                # print("ensemble_logis is on GPU", ensemble_logits.is_cuda)
+                # print("pred_reduced is on GPU", pred_reduced.is_cuda)
                 ensemble_logits += pred_reduced[s]
-                ensemble_logits = ensemble_logits.cpu()/(s+1)
-                print("ensemble_logis is on GPU", ensemble_logits.is_cuda)
-                nll[s-1] = F.binary_cross_entropy_with_logits(ensemble_logits, self.y_val[:].cpu().flatten(), reduction='mean')
-                print("self.y_val[:].cpu().flatten() is onGPU", self.y_val[:].cpu().flatten().is_cuda)
+                ensemble_logits = ensemble_logits/(s+1)
+                # print("ensemble_logis is on GPU", ensemble_logits.is_cuda)
+                nll[s-1] = F.binary_cross_entropy_with_logits(ensemble_logits, self.y_val[:].flatten(), reduction='mean')
+                # print("self.y_val[:].cpu().flatten() is onGPU", self.y_val[:].cpu().flatten().is_cuda)
         else:
             _, pred = torch.max(pred_list, 2) #return value and index
         
@@ -131,7 +131,7 @@ class hmc(algo_interface):
                 
                 err[s-1] = (pred.float() != self.y_val.flatten()).sum().float()/self.y_val.shape[0]
                 ensemble_proba += F.softmax(pred_list[s], dim=-1)
-                nll[s-1] = F.nll_loss(torch.log(ensemble_proba.cpu()/(s+1)), self.y_val[:].long().cpu().flatten(), reduction='mean')
+                nll[s-1] = F.nll_loss(torch.log(ensemble_proba/(s+1)), self.y_val[:].long().flatten(), reduction='mean')
 
         return err, best_error, nll
 
