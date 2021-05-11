@@ -40,6 +40,8 @@ def create_args()->dict:
     parser.add_argument('--q_depth', default=2, type=int,
                         help='Depth of the quantum circuit (number of variational layers)')
     
+    parser.add_argument('--quant_architecture', default="None", type=str, help="?")
+    
     ## nuts parameter
     parser.add_argument('--q_delta', default=0.01, type=float,
                         help='Initial spread of random quantum weights')
