@@ -20,11 +20,12 @@ class mnist_two_target_exp(exp_interface):
        
 
     # this we do rather use it here
-    def prepare_model(self)->nn.Module:     
+    def prepare_model(self)->nn.Module:  
+        device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")   
         if self.args.model_name == 'Quant':   
             model = apc_net(self.args, ampc(self.args))
         if self.args.model_name == 'mlp':
-            model = MLP(input_dim=1024, width=self.args.mlp_width, depth=self.args.mlp_depth, output_dim=1)
+            model = MLP(input_dim=1024, width=self.args.mlp_width, depth=self.args.mlp_depth, output_dim=1).to(device)
         return model 
         
     def feed_data(self, data):
