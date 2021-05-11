@@ -4,6 +4,9 @@ cd /zzproject/quanthmc
 
 export PYTHONPATH=$PYTHONPATH:/zzproject/quanthmc
 
+for i in 1 2 3 4 5
+do 
+
 for n in 0.1 0.3 0.5 0.7
 do
 for m in 0 1
@@ -12,9 +15,10 @@ do
 done
 done
 
-## run the adam mlp hmc experiment
-# for n in 0.1 0.3 0.5 0.7
-# do
-#         python3 experiments/ind_exp.py --algo_name HMC --data_name wine --model_name mlp  --tr_ratio $n --step_size 0.0003 --L 10 --num_samples 100
-# done
+# run the adam mlp hmc experiment
+for n in 0.1 0.3 0.5 0.7
+do
+        python3 experiments/ind_exp.py --algo_name HMC --data_name wine --model_name mlp  --tr_ratio $n --step_size 0.0003 --L 15 --num_samples 120
+done
 
+done 
