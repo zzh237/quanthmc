@@ -65,7 +65,7 @@ def run_exp(exp_interface, args)->dict:
 
     
     def count_parameters(model):
-        return sum(p.numel() for p in model.parameters() if p.requires_grad)
+        return int(sum(p.numel() for p in model.parameters() if p.requires_grad))
     args.n_params = count_parameters(model)
 
     if args.algo_name == 'SGHMC':
@@ -81,7 +81,7 @@ def run_exp(exp_interface, args)->dict:
     algo_name = repr(algo)
 
     start_time = datetime.now()
-    args.out_dir = os.path.join('result', data_name, algo_name, args.model_name, start_time.strftime("%Y%m%d-%H%M%S"))
+    args.out_dir = os.path.join('result', data_name, algo_name, args.model_name, "p_{}_ts_{}".format(args.n_params, args.N_tr), start_time.strftime("%Y%m%d-%H%M%S"))
     
     
     err, best_err, loss = exp_interface.apply_algorithm(algo)
