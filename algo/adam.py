@@ -60,7 +60,8 @@ class adam(algo_interface):
 
                 if self.args.flat_ims:
                     x = x.view(x.shape[0], -1)
-
+                print("### x is on GPU", x.is_cuda)
+                print("### y is on GPU", y.is_cuda) 
                 cost_pred, err = self.updater.onestep(x, y)
                 print('##batch finished', err)
                 
