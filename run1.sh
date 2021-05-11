@@ -20,7 +20,7 @@ do
 for n in 0.01 0.03 0.05 0.07
 do
         echo "run second"
-        python3 experiments/ind_exp.py --algo_name HMC --data_name mnist_two_target --model_name mlp  --tr_ratio $n --step_size 0.001 --L 20 --num_samples 100
+        python3 experiments/ind_exp.py --algo_name HMC --data_name mnist_two_target --model_name mlp  --tr_ratio $n --step_size 0.01 --L 20 --num_samples 100
 done
 
 done 
