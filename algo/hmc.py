@@ -111,9 +111,9 @@ class hmc(algo_interface):
                 print("pred_reduced is on GPU", pred_reduced.is_cuda)
                 ensemble_logits += pred_reduced[s]
                 ensemble_logits = ensemble_logits.cpu()/(s+1)
-                
+                print("ensemble_logis is on GPU", ensemble_logits.is_cuda)
                 nll[s-1] = F.binary_cross_entropy_with_logits(ensemble_logits, self.y_val[:].cpu().flatten(), reduction='mean')
-
+                print("self.y_val[:].cpu().flatten() is onGPU", self.y_val[:].cpu().flatten().is_cuda)
         else:
             _, pred = torch.max(pred_list, 2) #return value and index
         
