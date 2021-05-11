@@ -15,6 +15,8 @@ def assign_device():
         device_size = 4
     if args.data_name == 'mnist':
         device_size = 10
+    if args.data_name == 'mnist_two_target':
+        device_size = 10
     if args.data_name == 'digits':
         device_size = 10
     return device_size
@@ -35,19 +37,6 @@ def assign_depth():
     return depth_size
 
 
-def assign_device():
-    feature_size = 10
-    # if args.data_name == 'cancer':
-    #     feature_size = 30
-    # if args.data_name == 'mnist':
-    #     feature_size = 728
-    # if args.data_name == 'digits':
-    #     feature_size = 64
-    if args.data_name == 'wine':
-        feature_size = 13
-    if args.data_name == 'iris':
-        feature_size = 4
-    return feature_size     
 
 def assign_depth():
     depth_size = 1

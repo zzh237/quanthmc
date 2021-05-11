@@ -6,14 +6,15 @@ from torch.utils.data import DataLoader
 from algo.Stochastic_Gradient_HMC_SA.utils import * 
 from algo.gradient_based.adam_update import * 
 import time 
+from experiments.ind_exp import args
 
 class adam(algo_interface):
+    if args.data_name == 'mnist':
+        args.flat_ims = True 
+    
     def __init__(self, args, model, data):
         self.model = model
-        self.data = data  
-        if args.data_name == 'mnist':
-            args.flat_ims = True 
-        
+        self.data = data      
         data_train, data_test = data 
         
 

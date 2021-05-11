@@ -58,6 +58,7 @@ def run_exp(exp_interface, args)->dict:
     data_name = repr(exp_data) 
     args.data_name = data_name 
     exp_interface.feed_data(data) #here we give the model data 
+    args = exp_data.args
 
     
     exp_interface.prepare_exp(args)

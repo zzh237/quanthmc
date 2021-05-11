@@ -14,13 +14,13 @@ class vqc(quant_arc_interface):
     dev = qml.device("default.qubit", wires=assign_device())
     print("### dev is qubit")
     args.quant_architecture = "vqc"
+    args.n_qubits = assign_device()                # Number of qubits
+    if args.data_name == 'iris':
+        args.q_depth = 2
+
     def __init__(self, args):
         self.args = args 
-        self.args.n_qubits = assign_device()                # Number of qubits
-        self.args.q_depth = self.args.q_depth
-
-        if args.data_name == 'iris':
-            self.args.q_depth = 2
+       
 
        
         
