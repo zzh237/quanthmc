@@ -107,6 +107,8 @@ class hmc(algo_interface):
                 
                 
                 err[s-1] = (reduced_mean.float() != self.y_val.flatten()).sum().float()/self.y_val.shape[0]
+                print("ensemble_logis is on GPU", ensemble_logits.is_cuda)
+                print("pred_reduced is on GPU", pred_reduced.is_cuda)
                 ensemble_logits += pred_reduced[s]
                 ensemble_logits = ensemble_logits.cpu()/(s+1)
                 
