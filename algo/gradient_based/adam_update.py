@@ -63,6 +63,20 @@ class adam_updater():
         if len(self.grad_buff) > 1000:
             self.max_grad = np.mean(self.grad_buff) + self.grad_std_mul * np.std(self.grad_buff)
             self.grad_buff.pop(0)
+
+#             File "<__array_function__ internals>", line 6, in mean
+# 15579
+#   File "/usr/local/lib/python3.6/dist-packages/numpy/core/fromnumeric.py", line 3373, in mean
+# 15580
+#     out=out, **kwargs)
+# 15581
+#   File "/usr/local/lib/python3.6/dist-packages/numpy/core/_methods.py", line 170, in _mean
+# 15582
+#     ret = ret.dtype.type(ret / rcount)
+# 15583
+# AttributeError: 'torch.dtype' object has no attribute 'type'    
+
+
         # Clipping to prevent explosions
         self.grad_buff.append(nn.utils.clip_grad_norm_(parameters=self.model.parameters(),
                                                        max_norm=self.max_grad, norm_type=2))
