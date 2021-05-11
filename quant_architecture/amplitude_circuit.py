@@ -6,36 +6,8 @@ import pennylane as qml
 
 # from keras.datasets import mnist
 import numpy as np
+from quant_architecture.quant_arc_interface import * 
 
-
-def assign_device():
-    device_size = 1
-    if args.data_name == 'cancer':
-        device_size = 5
-    if args.data_name == 'wine':
-        device_size = 4
-    if args.data_name == 'iris':
-        device_size = 4
-    if args.data_name == 'mnist':
-        device_size = 10
-    if args.data_name == 'digits':
-        device_size = 10
-    return device_size
-
-
-def assign_depth():
-    depth_size = 1
-    if args.data_name == 'cancer':
-        depth_size = 1
-    if args.data_name == 'wine':
-        depth_size = 4
-    if args.data_name == 'iris':
-        depth_size = 4
-    if args.data_name == 'mnist':
-        depth_size = 6
-    if args.data_name == 'digits':
-        depth_size = 10
-    return depth_size
 
 class ampc():
 
@@ -51,7 +23,8 @@ class ampc():
         self.args.n_qubits = assign_device()                # Number of qubits
         self.args.q_depth = assign_depth()                 # Depth of the quantum circuit (number of variational layers)
         self.args.q_delta = 0.01              # Initial spread of random quantum weights
-        
+        self.args.quant_architecture = repr(self)
+
     def H_layer(self, nqubits):
         """Layer of single-qubit Hadamard gates.
         """
@@ -64,6 +37,8 @@ class ampc():
         for idx, element in enumerate(w):
             qml.Rot(element[0], element[1], element[2], wires=idx)
 
+    def __repr__(self):
+        return "ampc"
 
     def entangling_layer(self, nqubits):
         """Layer of CNOTs followed by another shifted layer of CNOT.

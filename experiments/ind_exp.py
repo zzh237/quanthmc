@@ -54,13 +54,15 @@ def run_exp(exp_interface, args)->dict:
     if args.data_name == 'wine':
         exp_data = wine_data(args)
     
+    exp_interface.prepare_exp(args)
+    model = exp_interface.prepare_model() #here we initilize the model 
+
     data = data_generator(exp_data).data
     data_name = repr(exp_data) 
     args.data_name = data_name 
 
 
-    exp_interface.prepare_exp(args, data)
-    model = exp_interface.prepare_model() #here we initilize the model 
+    exp_interface.feed_data(data) #here we give the model data 
 
     def count_parameters(model):
         return sum(p.numel() for p in model.parameters() if p.requires_grad)

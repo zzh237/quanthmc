@@ -14,10 +14,10 @@ class mnist_two_target_exp(exp_interface):
     def __init__(self):
         self.filename = os.path.basename(__file__) 
 
-    def prepare_exp(self, args, data):
+    def prepare_exp(self, args):
 
         self.args = args 
-        self.data = data  
+       
 
     # this we do rather use it here
     def prepare_model(self)->nn.Module:     
@@ -27,6 +27,10 @@ class mnist_two_target_exp(exp_interface):
             model = MLP(input_dim=1024, width=self.args.mlp_width, depth=self.args.mlp_depth, output_dim=1)
         return model 
         
+    def feed_data(self, data):
+        self.data = data  
+    
+    
     # @getattr
     # def model_name(self):
     #     return repr(self.algo)

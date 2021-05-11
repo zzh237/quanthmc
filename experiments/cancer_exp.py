@@ -14,10 +14,10 @@ class cancer_exp(exp_interface):
     def __init__(self):
         self.filename = os.path.basename(__file__) 
 
-    def prepare_exp(self, args, data):
+    def prepare_exp(self, args):
 
         self.args = args 
-        self.data = data  
+          
 
     # this we do rather use it here
     def prepare_model(self)->nn.Module:     
@@ -26,6 +26,10 @@ class cancer_exp(exp_interface):
         if self.args.model_name == 'mlp':
             model = MLP(input_dim=self.args.feature_dim, width=self.args.mlp_width, depth=self.args.mlp_depth, output_dim=1)
         return model 
+    
+    def feed_data(self, data):
+        self.data = data  
+    
         
     # @getattr
     # def model_name(self):

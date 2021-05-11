@@ -20,8 +20,11 @@ class cancer_data(classification_data):
     def train_test_data(self)->dict:
         data = self.load_data()
         x_ = data['data']
-        if self.args.model_name == 'Quant':
+        
+        if self.args.quant_architecture == 'ampc':
             x_ = np.pad(x_, ((0,0),(0,2)), 'constant')
+       
+            
         y_ = data['target']
         
         y_ = np.reshape(y_, (-1,1)) #reshape the y to have one more dimension to fit the requirement of torch output 

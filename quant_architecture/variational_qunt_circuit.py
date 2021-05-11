@@ -1,38 +1,12 @@
 import pennylane as qml
 
-from experiments.ind_exp import args
+
 import numpy as np 
 import torch 
 
-def assign_device():
-    feature_size = 10
-    if args.data_name == 'cancer':
-        feature_size = 5
-    if args.data_name == 'wine':
-        feature_size = 13
-    if args.data_name == 'iris':
-        feature_size = 4
-    if args.data_name == 'mnist':
-        feature_size = 728
-    if args.data_name == 'digits':
-        feature_size = 64
-    return feature_size     
+from quant_architecture.quant_arc_interface import * 
 
-def assign_depth():
-    depth_size = 1
-    if args.data_name == 'cancer':
-        depth_size = 1
-    if args.data_name == 'wine':
-        depth_size = 4
-    if args.data_name == 'iris':
-        depth_size = 4
-    if args.data_name == 'mnist':
-        depth_size = 6
-    if args.data_name == 'digits':
-        depth_size = 10
-    return depth_size
-
-class vqc():
+class vqc(quant_arc_interface):
     # if torch.cuda.is_available():
     #     dev = qml.device('qulacs.simulator', gpu=True, wires=assign_device())
     #     print("### dev is gpu")
@@ -42,7 +16,13 @@ class vqc():
     def __init__(self, args):
         self.args = args 
         self.args.n_qubits = assign_device()                # Number of qubits
-        self.args.q_depth = assign_depth()
+        self.args.q_depth = self.args.q_depth
+
+        if args.data_name == 'iris':
+            self.args.q_depth = 2
+
+        self.args.quant_architecture = repr(self)
+        print("pass")
         
     def H_layer(self, nqubits):
         """Layer of single-qubit Hadamard gates.
@@ -55,6 +35,9 @@ class vqc():
         """
         for idx, element in enumerate(w):
             qml.RY(element, wires=idx)
+
+    def __repr__(self):
+        return "vqc"
 
 
     def entangling_layer(self, nqubits):
