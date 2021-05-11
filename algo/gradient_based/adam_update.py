@@ -41,7 +41,11 @@ class adam_updater():
     def onestep(self, x, y):
         self.model.train()
         # x, y = to_variable(var=(x, y.long()), cuda=self.cuda)
-        self.optimizer.zero_grad()
+        self.optimizer.zero_grad() 
+        print("### x is on GPU", x.is_cuda)
+        print("### y is on GPU", y.is_cuda) 
+        print("### model is on GPU", self.model.is_cuda) 
+        
         out = self.model(x)
         if self.args.target_class ==1: #binary classification, the out is still logits
             # print("#### x is on cuda", x.is_cuda)
