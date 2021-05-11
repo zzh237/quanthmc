@@ -257,8 +257,8 @@ def leapfrog(params, momentum, log_prob_func, steps=10, step_size=0.1, jitter=0.
         def params_grad(p):
             p = p.detach().requires_grad_()
             log_prob = log_prob_func(p)
-            print("###@@log_prob is on cuda", log_prob.is_cuda)
-            print("###@@p is on cuda", p.is_cuda)
+            # print("###@@log_prob is on cuda", log_prob.is_cuda)
+            # print("###@@p is on cuda", p.is_cuda)
             # log_prob.backward() ## the speed bottle neck, whey the turn this off???
             p = collect_gradients(log_prob, p)
             # print(p.grad.std())

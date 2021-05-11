@@ -16,9 +16,21 @@ def assign_device():
         feature_size = 728
     if args.data_name == 'digits':
         feature_size = 64
-    
-    
     return feature_size     
+
+def assign_depth():
+    depth_size = 1
+    if args.data_name == 'cancer':
+        depth_size = 1
+    if args.data_name == 'wine':
+        depth_size = 4
+    if args.data_name == 'iris':
+        depth_size = 4
+    if args.data_name == 'mnist':
+        depth_size = 6
+    if args.data_name == 'digits':
+        depth_size = 10
+    return depth_size
 
 class vqc():
     # if torch.cuda.is_available():
@@ -29,6 +41,8 @@ class vqc():
     print("### dev is qubit")
     def __init__(self, args):
         self.args = args 
+        self.args.n_qubits = assign_device()                # Number of qubits
+        self.args.q_depth = assign_depth()
         
     def H_layer(self, nqubits):
         """Layer of single-qubit Hadamard gates.

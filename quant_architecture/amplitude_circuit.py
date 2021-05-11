@@ -8,6 +8,35 @@ import pennylane as qml
 import numpy as np
 
 
+def assign_device():
+    device_size = 1
+    if args.data_name == 'cancer':
+        device_size = 5
+    if args.data_name == 'wine':
+        device_size = 4
+    if args.data_name == 'iris':
+        device_size = 4
+    if args.data_name == 'mnist':
+        device_size = 10
+    if args.data_name == 'digits':
+        device_size = 10
+    return device_size
+
+
+def assign_depth():
+    depth_size = 1
+    if args.data_name == 'cancer':
+        depth_size = 1
+    if args.data_name == 'wine':
+        depth_size = 4
+    if args.data_name == 'iris':
+        depth_size = 4
+    if args.data_name == 'mnist':
+        depth_size = 6
+    if args.data_name == 'digits':
+        depth_size = 10
+    return depth_size
+
 class ampc():
 
     # if torch.cuda.is_available():
@@ -15,13 +44,13 @@ class ampc():
     # else:
     
     
-    dev = qml.device("default.qubit", wires=10)
+    dev = qml.device("default.qubit", wires=assign_device())
     
     def __init__(self, args):
         self.args = args 
-        self.args.n_qubits = 10                # Number of qubits
-        self.args.q_depth = 4                 # Depth of the quantum circuit (number of variational layers)
-        # self.args.q_delta = 0.01              # Initial spread of random quantum weights
+        self.args.n_qubits = assign_device()                # Number of qubits
+        self.args.q_depth = assign_depth()                 # Depth of the quantum circuit (number of variational layers)
+        self.args.q_delta = 0.01              # Initial spread of random quantum weights
         
     def H_layer(self, nqubits):
         """Layer of single-qubit Hadamard gates.

@@ -3,10 +3,12 @@ import numpy as np
 from experiments import exp_interface
 from data import * 
 from model.fully_connected import * 
+from model.apc_layers import * 
+from algo.hmc import * 
+from quant_architecture.amplitude_circuit import * 
 from model.vqc_layers import * 
 from algo.hmc import * 
 from quant_architecture.variational_qunt_circuit import * 
-
 from algo.algo_interface import *
 
 
@@ -23,6 +25,7 @@ class wine_exp(exp_interface):
     def prepare_model(self)->nn.Module:     
         if self.args.model_name == 'Quant':   
             model = vqc_net(self.args, vqc(self.args))
+            # model = apc_net(self.args, ampc(self.args))
         if self.args.model_name == 'mlp':
             model = MLP(input_dim=self.args.feature_dim, width=self.args.mlp_width, depth=self.args.mlp_depth, output_dim=3)
         return model 
@@ -37,9 +40,9 @@ class wine_exp(exp_interface):
         
         if self.args.algo_name == 'HMC':
             self.algo.fit()
-        acc, loss = self.algo.predict()
+        err, best_err,loss = self.algo.predict()
         
-        return acc, loss 
+        return err, best_err,loss 
     
     
         

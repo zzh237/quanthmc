@@ -6,7 +6,9 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
 # from web.app import * 
 import shutil
+from algo.hamiltorch.util import set_random_seed
 from experiments.ui_args import * 
+set_random_seed()
 args = create_args() #as long as the compiler see the parse arg, it starts to receive args from the terminal
 
 

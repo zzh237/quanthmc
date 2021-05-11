@@ -21,6 +21,9 @@ class wine_data(classification_data):
     def train_test_data(self)->dict:
         data = self.load_data()
         x_ = data['data']
+        # if self.args.model_name == 'Quant':
+        #     x_ = np.pad(x_, ((0,0),(0,3)), 'constant')
+            
         y_ = data['target']
         a = np.arange(x_.shape[0])
         self.args.N_tr = int(np.floor(x_.shape[0] * self.args.tr_ratio)) 

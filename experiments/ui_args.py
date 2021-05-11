@@ -10,23 +10,23 @@ def create_args()->dict:
 
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('--algo_name', default='HMC', type=str, 
+    parser.add_argument('--algo_name', default='Adam', type=str, 
                                 help='？')
     
     parser.add_argument('--model_name', default='Quant', type=str, 
                                 help='？')
 
-    parser.add_argument('--data_name', default='iris', type=str, 
+    parser.add_argument('--data_name', default='wine', type=str, 
                                 help='？')
     
     # Define the neural network depth and complexity
 
-    parser.add_argument('--mlp_depth', default=2, type=int, help="?")
+    parser.add_argument('--mlp_depth', default=0, type=int, help="?")
     parser.add_argument('--mlp_width', default=128, type=int, help="?")
 
     ## these parameters are created under the running process 
     parser.add_argument('--n_params', default=10, type=int, help="?")
-    parser.add_argument('--tr_ratio', default=0.1, type=float, help="?")
+    parser.add_argument('--tr_ratio', default=0.7, type=float, help="?")
     parser.add_argument('--feature_dim', default=4, type=int, help="?")
     parser.add_argument('--target_class', default=1, type=int, help="?")
 
@@ -35,7 +35,7 @@ def create_args()->dict:
     # DEFINE THE QUANTUM CIRCUIT
 
     parser.add_argument('--n_qubits', default=4, type=int, 
-                        help='number of qubits')
+                        help='number of qubits, will be fixed')
 
     parser.add_argument('--q_depth', default=2, type=int,
                         help='Depth of the quantum circuit (number of variational layers)')
@@ -50,10 +50,10 @@ def create_args()->dict:
     
     
     ## hmc parameter
-    parser.add_argument('--step_size', default=0.1, type=float, 
+    parser.add_argument('--step_size', default=0.01, type=float, 
                         help='leapfrog step_size used')
     
-    parser.add_argument('--L', default=20, type=int, 
+    parser.add_argument('--L', default=15, type=int, 
                         help='L leapfrog steps envolved')
     
     parser.add_argument('--num_samples', default=100, type=int, 

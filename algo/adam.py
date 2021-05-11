@@ -62,6 +62,7 @@ class adam(algo_interface):
                     x = x.view(x.shape[0], -1)
 
                 cost_pred, err = self.updater.onestep(x, y)
+                print('##batch finished', err)
                 
                 it_count += 1
                 err_train[i] += err
