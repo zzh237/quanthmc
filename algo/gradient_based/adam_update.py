@@ -44,7 +44,7 @@ class adam_updater():
         self.optimizer.zero_grad() 
         # print("### x is on GPU", x.is_cuda)
         # print("### y is on GPU", y.is_cuda) 
-        print("### model is on GPU", next(self.model.is_cuda.parameters()).is_cuda) 
+        print("### model is on GPU", next(self.model.parameters()).is_cuda) 
         
         out = self.model(x)
         if self.args.target_class ==1: #binary classification, the out is still logits
