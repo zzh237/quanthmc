@@ -72,8 +72,8 @@ class hmc(algo_interface):
         
         pred_list, log_prob_list = hmt.predict_model(self.model, x=self.x_val, y=self.y_val, samples=self.params_hmc[:], model_loss=self.losstype, tau_out=1., tau_list=self.tau_list)
         
-        err = torch.zeros( len(pred_list)-1)
-        nll = torch.zeros( len(pred_list)-1)
+        err = torch.zeros( len(pred_list))
+        nll = torch.zeros( len(pred_list))
         
         if self.args.target_class == 1:
             
@@ -83,36 +83,41 @@ class hmc(algo_interface):
             pred = torch.squeeze(pred_list) 
             pred_reduced = torch.squeeze(pred_list) 
 
-            pred[pred >= 0] = 1
-            pred[pred < 0] = 0
+            pred = torch.where(pred>=0, 1, 0)
+            # pred[pred >= 0] = 1
+            # pred[pred < 0] = 0
             
             best_error = (pred.float() != self.y_val.flatten()).sum().float()/self.y_val.shape[0]
             
-            ensemble_logits = pred_reduced[0]
+            ensemble_logits = pred_reduced[0] # 
             
-            for s in range(1,len(pred_list)):
+            # err[0] = (reduced_mean.float() != self.y_val.flatten()).sum().float()/self.y_val.shape[0]
+            # nll[0] = F.binary_cross_entropy_with_logits(ensemble_logits, self.y_val[:].flatten(), reduction='mean')
+            
+            for s in range(0,len(pred_list)):
 
                 single_pred = pred_reduced[s]
-                single_pred[single_pred >= 0] = 1
-                single_pred[single_pred < 0] = 0
+                single_pred = torch.where(single_pred>=0, 1, 0)
+
                 error = (single_pred.float() != self.y_val.flatten()).sum().float()/self.y_val.shape[0]
                 if error < best_error:
                     best_error = error
 
 
-                reduced_mean = pred_reduced[:s].mean(0)
-                reduced_mean[reduced_mean >= 0] = 1
-                reduced_mean[reduced_mean < 0] = 0
+                reduced_mean = pred_reduced[:s+1].mean(0)
+                reduced_mean = torch.where(reduced_mean>=0, 1, 0)
                 
                 
                 
-                err[s-1] = (reduced_mean.float() != self.y_val.flatten()).sum().float()/self.y_val.shape[0]
+                
+                err[s] = (reduced_mean.float() != self.y_val.flatten()).sum().float()/self.y_val.shape[0]
                 # print("ensemble_logis is on GPU", ensemble_logits.is_cuda)
                 # print("pred_reduced is on GPU", pred_reduced.is_cuda)
+                # ensemble_logits = pred_reduced[s]
                 ensemble_logits += pred_reduced[s]
                 ensemble_logits = ensemble_logits/(s+1)
                 # print("ensemble_logis is on GPU", ensemble_logits.is_cuda)
-                nll[s-1] = F.binary_cross_entropy_with_logits(ensemble_logits, self.y_val[:].flatten(), reduction='mean')
+                nll[s] = F.binary_cross_entropy_with_logits(ensemble_logits, self.y_val[:].flatten(), reduction='mean')
                 # print("self.y_val[:].cpu().flatten() is onGPU", self.y_val[:].cpu().flatten().is_cuda)
         else:
             _, pred = torch.max(pred_list, 2) #return value and index
@@ -121,7 +126,7 @@ class hmc(algo_interface):
 
             ensemble_proba = F.softmax(pred_list[0], dim=-1)
         
-            for s in range(1,len(pred_list)):
+            for s in range(0,len(pred_list)):
                 _, pred = torch.max(pred_list[:s].mean(0), -1)
                 _, single_pred = torch.max(pred_list[s], -1)
 
@@ -129,9 +134,9 @@ class hmc(algo_interface):
                 if error < best_error:
                     best_error = error
                 
-                err[s-1] = (pred.float() != self.y_val.flatten()).sum().float()/self.y_val.shape[0]
+                err[s] = (pred.float() != self.y_val.flatten()).sum().float()/self.y_val.shape[0]
                 ensemble_proba += F.softmax(pred_list[s], dim=-1)
-                nll[s-1] = F.nll_loss(torch.log(ensemble_proba/(s+1)), self.y_val[:].long().flatten(), reduction='mean')
+                nll[s] = F.nll_loss(torch.log(ensemble_proba/(s+1)), self.y_val[:].long().flatten(), reduction='mean')
 
         return err, best_error, nll
 

@@ -16,7 +16,7 @@ def create_args()->dict:
     parser.add_argument('--model_name', default='mlp', type=str, 
                                 help='？')
 
-    parser.add_argument('--data_name', default='mnist_two_target', type=str, 
+    parser.add_argument('--data_name', default='cancer', type=str, 
                                 help='？')
     
     # Define the neural network depth and complexity

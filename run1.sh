@@ -4,7 +4,7 @@ cd /zzproject/quanthmc
 
 export PYTHONPATH=$PYTHONPATH:/zzproject/quanthmc
 
-for i in 1 
+for i in 1 2 3 4 5
 do 
 
 # for n in 0.01 0.03 0.05 0.07
@@ -17,16 +17,16 @@ do
 # done
 
 # run the adam mlp hmc experiment
-for n in 0.7 
+for n in 0.01 0.03 0.05 0.07 
 do
-for m in 0 
+for m in 0 1
 do
 for s in 0.01
 do
 for l in 20
 do 
         echo "run second"
-        python3 experiments/ind_exp.py --algo_name HMC --data_name cancer --model_name mlp  --tr_ratio $n --mlp_depth $m --step_size $s --L $l --num_samples 100
+        python3 experiments/ind_exp.py --algo_name HMC --data_name mnist_two_target --model_name mlp  --tr_ratio $n --mlp_depth $m --step_size $s --L $l --num_samples 100
 done
 done  
 done
