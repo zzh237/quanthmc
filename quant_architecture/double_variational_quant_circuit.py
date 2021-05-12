@@ -7,7 +7,7 @@ import torch
 from quant_architecture.quant_arc_interface import * 
 
 class dvqc(quant_arc_interface):
-    if torch.cuda.is_available():
+    if False:
         dev1 = qml.device('qulacs.simulator', gpu=True, wires=assign_device())
         dev2 = qml.device('qulacs.simulator', gpu=True, wires=4)         
         print("### dev is gpu")
