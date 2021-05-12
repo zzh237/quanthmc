@@ -13,7 +13,7 @@ def create_args()->dict:
     parser.add_argument('--algo_name', default='HMC', type=str, 
                                 help='？')
     
-    parser.add_argument('--model_name', default='mlp', type=str, 
+    parser.add_argument('--model_name', default='Quant', type=str, 
                                 help='？')
 
     parser.add_argument('--data_name', default='cancer', type=str, 
@@ -133,9 +133,9 @@ def create_args()->dict:
     
     args.device = 'cuda' if torch.cuda.is_available() else 'cpu'
     
-    if args.algo_name == 'HMC' and args.model_name == 'Quant':
-        args.device = 'cpu'
-        print("###for hmc with quant, whe have to use CPU!!")
+    # if args.algo_name == 'HMC' and args.model_name == 'Quant':
+    #     args.device = 'cpu'
+    #     print("###for hmc with quant, whe have to use CPU!!")
     
     if args.device == 'cuda':
         print("########: GPU IS Open!")
