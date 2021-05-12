@@ -1,4 +1,8 @@
 # this is the experiment for adam optimizer
+echo 'if success:'
+cp /zzproject/repo/torch.py /usr/local/lib/python3.6/dist-packages/pennylane/interfaces/torch.py
+cat /zzproject/repo/torch.py /usr/local/lib/python3.6/dist-packages/pennylane/interfaces/torch.py|grep zzcheck
+echo 'done'
 
 cd /zzproject/quanthmc
 
