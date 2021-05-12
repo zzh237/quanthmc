@@ -23,12 +23,12 @@ class wine_exp(exp_interface):
 
     # this we do rather use it here
     def prepare_model(self)->nn.Module:   
-        device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")  
+        # device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")  
         if self.args.model_name == 'Quant':   
-            model = dvqc_net(QNet_1(dvqc(self.args)), QNet_2(dvqc(self.args))).to('cpu')
+            model = dvqc_net(QNet_1(dvqc(self.args)), QNet_2(dvqc(self.args))).to(self.args.device)
             # model = apc_net(self.args, ampc(self.args))
         if self.args.model_name == 'mlp':
-            model = MLP(input_dim=self.args.feature_dim, width=self.args.mlp_width, depth=self.args.mlp_depth, output_dim=3).to(device)
+            model = MLP(input_dim=self.args.feature_dim, width=self.args.mlp_width, depth=self.args.mlp_depth, output_dim=3).to(self.args.device)
         return model 
 
     def feed_data(self, data):
