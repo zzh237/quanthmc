@@ -22,7 +22,7 @@ do
 for m in 0 1
 do
         echo "run second"
-        python3 experiments/ind_exp.py --algo_name HMC --data_name mnist_two_target --model_name mlp  --tr_ratio $n --mlp_depth $m --step_size 0.05 --L 20 --num_samples 100
+        python3 experiments/ind_exp.py --algo_name HMC --data_name mnist_two_target --model_name mlp  --tr_ratio $n --mlp_depth $m --step_size 0.0001 --L 20 --num_samples 100
 done 
 done
 
