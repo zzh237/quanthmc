@@ -4,7 +4,7 @@ cd /zzproject/quanthmc
 
 export PYTHONPATH=$PYTHONPATH:/zzproject/quanthmc
 
-for i in 1 2 3 4 5
+for i in 1 
 do 
 
 # for n in 0.01 0.03 0.05 0.07
