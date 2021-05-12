@@ -17,16 +17,16 @@ do
 # done
 
 # run the adam mlp hmc experiment
-for n in 0.7 
+for n in 0.07 
 do
-for m in 0 1
+for m in 0 
 do
 for s in 0.01
 do
 for l in 20
 do 
         echo "run second"
-        python3 experiments/ind_exp.py --algo_name HMC --data_name iris --model_name mlp  --tr_ratio $n --mlp_depth $m --step_size $s --L $l --num_samples 100
+        python3 experiments/ind_exp.py --algo_name HMC --data_name mnist_two_target --model_name Quant --q_depth 20 --tr_ratio $n --mlp_depth $m --step_size $s --L $l --num_samples 100
 done
 done  
 done
