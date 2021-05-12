@@ -86,7 +86,7 @@ def run_exp(exp_interface, args)->dict:
     
     
     err, best_err, loss = exp_interface.apply_algorithm(algo)
-    print("####Final best error is", best_err)
+    print("###################################Final best error is##########################", best_err)
     
     time_duration = datetime.now() - start_time
     
