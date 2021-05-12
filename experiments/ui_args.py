@@ -137,9 +137,6 @@ def create_args()->dict:
     #     args.device = 'cpu'
     #     print("###for hmc with quant, whe have to use CPU!!")
 
-    if args.model_name == 'Quant':
-        args.device = 'cpu'
-        print("###for hmc with quant, whe have to use CPU!!")
     
     if args.device == 'cuda':
         print("########: GPU IS Open!")
