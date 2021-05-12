@@ -6,9 +6,9 @@ from model.fully_connected import *
 from model.apc_layers import * 
 from algo.hmc import * 
 from quant_architecture.amplitude_circuit import * 
-from model.vqc_layers import * 
+from model.dvqc_layers import * 
 from algo.hmc import * 
-from quant_architecture.variational_qunt_circuit import * 
+from quant_architecture.double_variational_quant_circuit import * 
 from algo.algo_interface import *
 
 
@@ -25,7 +25,7 @@ class wine_exp(exp_interface):
     def prepare_model(self)->nn.Module:   
         device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")  
         if self.args.model_name == 'Quant':   
-            model = vqc_net(self.args, vqc(self.args))
+            model = dvqc_net(QNet_1(dvqc(self.args)), QNet_2(dvqc(self.args))).to(device)
             # model = apc_net(self.args, ampc(self.args))
         if self.args.model_name == 'mlp':
             model = MLP(input_dim=self.args.feature_dim, width=self.args.mlp_width, depth=self.args.mlp_depth, output_dim=3).to(device)

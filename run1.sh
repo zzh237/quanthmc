@@ -26,7 +26,7 @@ do
 for l in 20
 do 
         echo "run second"
-        python3 experiments/ind_exp.py --algo_name HMC --data_name mnist_two_target --model_name Quant --q_depth 20 --tr_ratio $n --mlp_depth $m --step_size $s --L $l --num_samples 100
+        python3 experiments/ind_exp.py --algo_name Adam --data_name wine --model_name Quant --q_depth 2 --tr_ratio $n --mlp_depth $m --step_size $s --L $l --num_samples 100
 done
 done  
 done

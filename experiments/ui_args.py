@@ -10,13 +10,13 @@ def create_args()->dict:
 
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('--algo_name', default='HMC', type=str, 
+    parser.add_argument('--algo_name', default='Adam', type=str, 
                                 help='？')
     
     parser.add_argument('--model_name', default='Quant', type=str, 
                                 help='？')
 
-    parser.add_argument('--data_name', default='cancer', type=str, 
+    parser.add_argument('--data_name', default='wine', type=str, 
                                 help='？')
     
     # Define the neural network depth and complexity

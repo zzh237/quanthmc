@@ -86,9 +86,8 @@ class adam_updater():
         self.optimizer.step()
 
         if self.args.target_class ==1:
-            pred = out 
-            pred[pred >= 0] = 1
-            pred[pred < 0] = 0
+            pred = out.detach().clone() 
+            pred = torch.where(pred>=0, 1, 0)
         if self.args.target_class >2:    
         # out: (batch_size, out_channels, out_caps_dims)
             pred = out.data.max(dim=1, keepdim=False)[1]  # get the index of the max log-probability
@@ -115,9 +114,8 @@ class adam_updater():
 
         if self.args.target_class ==1: #binary classification, the out is still logits
             loss = F.binary_cross_entropy_with_logits(out, y, reduction='sum')
-            pred = out 
-            pred[pred >= 0] = 1
-            pred[pred < 0] = 0
+            pred = out.detach().clone() 
+            pred = torch.where(pred>=0, 1, 0)
 
             probs = torch.sigmoid(out)
         

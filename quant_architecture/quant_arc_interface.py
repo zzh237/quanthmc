@@ -10,7 +10,7 @@ def assign_device():
     if args.data_name == 'cancer':
         device_size = 5
     if args.data_name == 'wine':
-        device_size = 4
+        device_size = 13
     if args.data_name == 'iris':
         device_size = 4
     if args.data_name == 'mnist':
@@ -29,28 +29,13 @@ def assign_depth():
     if args.data_name == 'wine':
         depth_size = 4
     if args.data_name == 'iris':
-        depth_size = 4
-    if args.data_name == 'mnist':
-        depth_size = 6
-    if args.data_name == 'digits':
-        depth_size = 10
-    return depth_size
-
-
-
-def assign_depth():
-    depth_size = 1
-    if args.data_name == 'cancer':
-        depth_size = 1
-    if args.data_name == 'wine':
-        depth_size = 4
-    if args.data_name == 'iris':
         depth_size = 2
     if args.data_name == 'mnist':
         depth_size = 6
     if args.data_name == 'digits':
         depth_size = 10
     return depth_size
+
 
 
 class quant_arc_interface(ABC):

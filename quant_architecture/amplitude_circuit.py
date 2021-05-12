@@ -11,12 +11,12 @@ from quant_architecture.quant_arc_interface import *
 
 class ampc():
 
-    # if torch.cuda.is_available():
-    #     dev = qml.device('qulacs.simulator', gpu=True, wires=10)
-    # else:
-    
-    
-    dev = qml.device("default.qubit", wires=assign_device())
+    if torch.cuda.is_available():
+        dev = qml.device('qulacs.simulator', gpu=True, wires=assign_device())     
+        print("### dev is gpu")
+    else:
+        dev = qml.device("default.qubit", wires=assign_device())
+        print("### dev is qubit")
     args.quant_architecture = "ampc"
     args.n_qubits = assign_device() # Number of qubits
     # args.q_depth = assign_depth()   # Depth of the quantum circuit (number of variational layers)
